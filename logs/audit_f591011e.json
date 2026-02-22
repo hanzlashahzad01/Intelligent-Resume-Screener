@@ -1,0 +1,87 @@
+{
+  "jd": "Hiring a MERN Stack Developer with strong knowledge of React, Node.js, Express, and MongoDB. The candidate should be comfortable building REST APIs, integrating frontend and backend, and working with Git, Docker, and cloud deployment (Vercel / Render / AWS). Experience with real-time features and dashboards is a plus.",
+  "jd_skills": [
+    "Node.js",
+    "REST",
+    "Vercel",
+    "React",
+    "Express",
+    "AWS",
+    "MongoDB",
+    "Git",
+    "Docker"
+  ],
+  "jd_bias": [],
+  "num_cv": 6,
+  "processing_time_sec": 4.854,
+  "candidates": [
+    {
+      "rank": 1,
+      "name": "HanzlaShahzad",
+      "score": 56.61,
+      "semantic_score": 47.2,
+      "tfidf_score": 14.67,
+      "experience": 1,
+      "skills": [
+        "Node.js",
+        "Flutter",
+        "GitHub",
+        "Vercel",
+        "PHP",
+        "React",
+        "MongoDB",
+        "SQL",
+        "C++"
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "with TravelX",
+      "score": 12.96,
+      "semantic_score": 32.41,
+      "tfidf_score": 0.0,
+      "experience": 0,
+      "skills": []
+    },
+    {
+      "rank": 3,
+      "name": "Code Analysis Report",
+      "score": 10.81,
+      "semantic_score": 27.03,
+      "tfidf_score": 0.0,
+      "experience": 0,
+      "skills": [
+        "JavaScript"
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "Code Analysis Report",
+      "score": 9.68,
+      "semantic_score": 24.2,
+      "tfidf_score": 0.0,
+      "experience": 0,
+      "skills": [
+        "JavaScript"
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "PM",
+      "score": 6.38,
+      "semantic_score": 15.95,
+      "tfidf_score": 0.0,
+      "experience": 0,
+      "skills": []
+    },
+    {
+      "rank": 6,
+      "name": "GOVERNMENT OF THE PUNJAB",
+      "score": 4.58,
+      "semantic_score": 11.46,
+      "tfidf_score": 0.0,
+      "experience": 19,
+      "skills": []
+    }
+  ]
+}

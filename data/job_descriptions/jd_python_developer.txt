@@ -1,0 +1,7 @@
+Job Title: Senior Python Developer
+Requirements:
+- Strong proficiency in Python and Flask/Django
+- Experience with SQL and database design
+- Knowledge of Machine Learning and NLP is a plus
+- Familiarity with Git, Docker, and CI/CD tools
+- Excellent problem-solving skills

@@ -1,0 +1,38 @@
+{
+  "jd": "Looking for a Data Scientist with solid skills in Python, Pandas, NumPy, Scikit-Learn, and SQL. Responsibilities include building ML models, performing exploratory data analysis, and communicating insights to stakeholders. Experience with deep learning (PyTorch / TensorFlow) and ML Ops is a strong advantage.",
+  "jd_skills": [
+    "TensorFlow",
+    "Data Analysis",
+    "Pandas",
+    "Scikit-Learn",
+    "Python",
+    "NumPy",
+    "PyTorch",
+    "Deep Learning",
+    "SQL"
+  ],
+  "jd_bias": [],
+  "num_cv": 1,
+  "processing_time_sec": 2.414,
+  "candidates": [
+    {
+      "rank": 1,
+      "name": "HanzlaShahzad",
+      "score": 33.04,
+      "semantic_score": 22.91,
+      "tfidf_score": 1.81,
+      "experience": 1,
+      "skills": [
+        "Vercel",
+        "Flutter",
+        "Node.js",
+        "MongoDB",
+        "PHP",
+        "GitHub",
+        "SQL",
+        "C++",
+        "React"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+Max Mustermann
+Email: max.mustermann@email.de
+Telefon: +49 123 456789
+Ort: Berlin, Deutschland
+
+BERUFSERFAHRUNG:
+Softwareentwickler (2019 - Heute) - TechBerlin GmbH
+- Entwicklung von Webanwendungen mit Python und Django.
+- Erfahrung mit SQL-Datenbanken und REST-APIs.
+- 4 Jahre Erfahrung in der Softwareentwicklung.
+
+AUSBILDUNG:
+Master of Science in Informatik - TU Berlin (2018)
+
+FÄHIGKEITEN:
+Python, Django, SQL, Git, Docker, REST, JavaScript, HTML, CSS

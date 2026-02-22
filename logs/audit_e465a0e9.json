@@ -1,0 +1,40 @@
+{
+  "jd": "Hiring a MERN Stack Developer with strong knowledge of React, Node.js, Express, and MongoDB. The candidate should be comfortable building REST APIs, integrating frontend and backend, and working with Git, Docker, and cloud deployment (Vercel / Render / AWS). Experience with real-time features and dashboards is a plus.",
+  "jd_skills": [
+    "AWS",
+    "Docker",
+    "Express",
+    "Git",
+    "MongoDB",
+    "Node.js",
+    "REST",
+    "React",
+    "Vercel"
+  ],
+  "jd_bias": [],
+  "num_cv": 1,
+  "processing_time_sec": 1.934,
+  "candidates": [
+    {
+      "rank": 1,
+      "name": "HanzlaShahzad",
+      "score": 55.57,
+      "semantic_score": 47.2,
+      "tfidf_score": 11.2,
+      "experience": 1,
+      "skills": [
+        "C++",
+        "Data Science",
+        "Flutter",
+        "GitHub",
+        "MongoDB",
+        "Node.js",
+        "PHP",
+        "React",
+        "React Native",
+        "SQL",
+        "Vercel"
+      ]
+    }
+  ]
+}

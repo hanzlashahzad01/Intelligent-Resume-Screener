@@ -1,0 +1,7 @@
+Jane Smith
+Data Scientist
+Skills: Python, R, Machine Learning, Deep Learning, NLP, TensorFlow, PyTorch, Pandas, Scikit-Learn
+Experience:
+- Built recommendation engines using SciPy and Scikit-Learn
+- Analyzed large datasets using Pandas and NumPy
+- Developed NLP models for sentiment analysis

@@ -1,0 +1,17 @@
+John Doe
+Email: john.doe@email.com
+Phone: +44 7700 900123
+Location: London, UK
+
+EXPERIENCE:
+Senior Software Engineer (2020 - Present) - TechCorp Solutions
+- Led a team of 5 developers to build cloud-native microservices in Python.
+- 5 years of experience in Backend development.
+- Implemented Docker and Kubernetes for high-availability systems.
+
+Education:
+Master of Science in Artificial Intelligence - University of Edinburgh (2018)
+Bachelor of Technology in Computer Science - IIT Bombay (2016)
+
+Skills:
+Python, Java, Git, Docker, Kubernetes, SQL, AWS, Machine Learning, Deep Learning, FastAPI, Microservices

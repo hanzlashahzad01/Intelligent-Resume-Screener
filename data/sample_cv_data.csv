@@ -1,0 +1,6 @@
+id,name,skills,experience
+1,John Doe,"Python, Flask, SQL, Docker",3 years software development
+2,Jane Smith,"Machine Learning, NLP, PyTorch, Pandas",2 years data science
+3,Robert Brown,"Java, Spring Boot, AWS, Kubernetes",5 years backend development
+4,Alice Wilson,"React, JavaScript, Node.js, Firebase",2 years frontend development
+5,Charlie Davis,"Data Analysis, Tableau, SQL, Excel",4 years data analysis

@@ -1,0 +1,17 @@
+scoring:
+  use_semantic: true
+  weight_semantic: 0.4
+  weight_tfidf: 0.3
+  use_bm25: true
+  weight_bm25: 0.2
+  weight_skill_ratio: 0.3
+  top_k_highlight_sentences: 3
+
+app:
+  language: english
+  enable_audit_log: true
+  audit_log_dir: logs
+
+ui:
+  show_processing_time: true
+

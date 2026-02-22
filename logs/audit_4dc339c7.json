@@ -1,0 +1,28 @@
+{
+  "jd": "kjjk",
+  "jd_skills": [],
+  "jd_bias": [],
+  "num_cv": 1,
+  "processing_time_sec": 2.123,
+  "candidates": [
+    {
+      "rank": 1,
+      "name": "HanzlaShahzad",
+      "score": 37.1,
+      "semantic_score": 17.76,
+      "tfidf_score": 0.0,
+      "experience": 1,
+      "skills": [
+        "Vercel",
+        "Flutter",
+        "Node.js",
+        "MongoDB",
+        "PHP",
+        "GitHub",
+        "SQL",
+        "C++",
+        "React"
+      ]
+    }
+  ]
+}

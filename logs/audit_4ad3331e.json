@@ -1,0 +1,100 @@
+{
+  "jd": "We need a Product Manager experienced in working with cross-functional engineering teams to deliver web-based products. The PM should be skilled in writing clear user stories, prioritizing backlogs, defining KPIs, and collaborating with designers and developers. Technical understanding of software development and analytics tools is preferred.",
+  "jd_skills": [],
+  "jd_bias": [],
+  "num_cv": 7,
+  "processing_time_sec": 2.313,
+  "candidates": [
+    {
+      "rank": 1,
+      "name": "HanzlaShahzad",
+      "score": 67.91,
+      "semantic_score": 39.65,
+      "tfidf_score": 6.82,
+      "experience": 1,
+      "skills": [
+        "C++",
+        "Data Science",
+        "Flutter",
+        "GitHub",
+        "MongoDB",
+        "Node.js",
+        "PHP",
+        "React",
+        "React Native",
+        "SQL",
+        "Vercel"
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "Professional Modern",
+      "score": 62.65,
+      "semantic_score": 39.65,
+      "tfidf_score": 6.68,
+      "experience": 3,
+      "skills": [
+        "GitHub",
+        "MongoDB",
+        "Node.js",
+        "React",
+        "SQL",
+        "Vercel"
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "PM",
+      "score": 49.86,
+      "semantic_score": 27.42,
+      "tfidf_score": 5.55,
+      "experience": 0,
+      "skills": []
+    },
+    {
+      "rank": 4,
+      "name": "with TravelX",
+      "score": 41.59,
+      "semantic_score": 28.98,
+      "tfidf_score": 0.0,
+      "experience": 0,
+      "skills": []
+    },
+    {
+      "rank": 5,
+      "name": "Code Analysis Report",
+      "score": 40.02,
+      "semantic_score": 19.62,
+      "tfidf_score": 1.05,
+      "experience": 0,
+      "skills": [
+        "Data Analysis",
+        "Data Science",
+        "JavaScript"
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "Code Analysis Report",
+      "score": 35.03,
+      "semantic_score": 12.57,
+      "tfidf_score": 0.0,
+      "experience": 0,
+      "skills": [
+        "Data Analysis",
+        "JavaScript"
+      ]
+    },
+    {
+      "rank": 7,
+      "name": "GOVERNMENT OF THE PUNJAB",
+      "score": 31.73,
+      "semantic_score": 4.33,
+      "tfidf_score": 0.0,
+      "experience": 19,
+      "skills": [
+        "Data Science"
+      ]
+    }
+  ]
+}

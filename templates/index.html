@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recruitment Command Center | Elite Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .upload-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            padding: 3rem;
+            border-top: 5px solid var(--primary);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .drop-zone {
+            height: 200px;
+            border: 2px dashed var(--glass-border);
+            border-radius: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 1rem;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .drop-zone input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            color: white;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 200px;
+            margin-top: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .input-label {
+            display: block;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            font-size: 0.8rem;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="max-width: 900px; padding-top: 2rem;">
+        <nav style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+            <div></div> <!-- Spacer for alignment -->
+            {% if current_user.is_authenticated %}
+            <div style="display: flex; gap: 1.5rem; align-items: center;">
+                <span style="font-size: 0.9rem; color: var(--text-dim);">Logged in as <strong
+                        style="color: var(--text-main);">{{ current_user.username }}</strong></span>
+                <a href="/logout" class="btn-elite"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.8rem; background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); color: #fca5a5;">Logout</a>
+            </div>
+            {% else %}
+            <div style="display: flex; gap: 1rem;">
+                <a href="/login" class="btn-elite" style="padding: 0.5rem 1.2rem; font-size: 0.8rem;">Login</a>
+                <a href="/signup" class="btn-elite"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.8rem; background: var(--card-bg);">Join Hub</a>
+            </div>
+            {% endif %}
+        </nav>
+
+        <header>
+            <div class="header-left"></div>
+            <div class="header-center">
+                <span class="stat-label">Analysis Engine V2.1</span>
+                <h1 class="gradient-text" style="font-size: clamp(3rem, 10vw, 5rem); margin-bottom: 0.5rem;">Recruitment
+                    Hub</h1>
+                <p style="color: var(--text-dim); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.05rem;">
+                    Advanced AI Resume Analysis & Shortlisting
+                </p>
+            </div>
+            <div class="header-right"></div>
+        </header>
+
+        {% if current_user.is_authenticated and recent_scans %}
+        <div style="margin-bottom: 4rem;">
+            <span class="stat-label">Past Analysis Results</span>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                {% for scan in recent_scans %}
+                <a href="/scan/{{ scan.id }}" style="text-decoration: none; color: inherit;">
+                    <div class="stat-card clickable" style="padding: 1.25rem;">
+                        <div style="font-size: 0.75rem; color: var(--primary-light); margin-bottom: 0.5rem;">{{
+                            scan.timestamp.strftime('%d %b %Y') }}</div>
+                        <div
+                            style="font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            {{ scan.job_title }}</div>
+                        <div style="font-size: 0.85rem; color: var(--text-dim);">{{ scan.candidate_count }} CVs • {{
+                            scan.top_score }}% Match</div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div style="margin-bottom: 3rem; animation: fadeInUp 0.5s ease;">
+            {% for message in messages %}
+            <div
+                style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); color: #fca5a5; padding: 1.25rem; border-radius: 1.25rem; font-weight: 500; text-align: center;">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="upload-section">
+            <div class="form-card">
+                <form action="/process" method="POST" enctype="multipart/form-data">
+                    <div style="margin-bottom: 2.5rem;">
+                        <label class="input-label" for="jd_text">Job Specification</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                            <button type="button" class="btn-elite" style="padding: 0.4rem 0.9rem; font-size: 0.75rem;"
+                                onclick="applyPreset('python_dev')">Python Dev</button>
+                            <button type="button" class="btn-elite" style="padding: 0.4rem 0.9rem; font-size: 0.75rem;"
+                                onclick="applyPreset('data_scientist')">Data Scientist</button>
+                            <button type="button" class="btn-elite" style="padding: 0.4rem 0.9rem; font-size: 0.75rem;"
+                                onclick="applyPreset('mern')">MERN Role</button>
+                            <button type="button" class="btn-elite" style="padding: 0.4rem 0.9rem; font-size: 0.75rem;"
+                                onclick="applyPreset('pm')">Product Manager</button>
+                        </div>
+                        <textarea name="jd_text" id="jd_text"
+                            placeholder="Describe the ideal candidate or use a preset above to auto-fill the job spec."></textarea>
+                    </div>
+
+                    <div style="margin-bottom: 3rem;">
+                        <label class="input-label">Candidate Portfolios (PDF / DOCX / TXT)</label>
+                        <div class="drop-zone" id="drop-zone">
+                            <div
+                                style="background: rgba(99, 102, 241, 0.1); padding: 1.5rem; border-radius: 50%; margin-bottom: 1.5rem;">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" style="color: var(--primary-light);">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                            </div>
+                            <p id="drop-text" style="font-weight: 700; color: #f1f5f9; font-size: 1.1rem;">Drop files
+                                here</p>
+                            <p
+                                style="font-size: 0.85rem; color: var(--text-dim); margin-top: 0.5rem; font-weight: 500;">
+                                or click to browse from system</p>
+                            <input type="file" name="cv_files" id="cv_files" multiple accept=".pdf,.txt,.docx" required>
+                        </div>
+                        <div id="file-list" style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.8rem;">
+                            <!-- Selected files will appear here -->
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 4rem;">
+                        <button type="submit" class="btn-elite"
+                            style="width: 100%; padding: 1.25rem; font-size: 1.2rem; letter-spacing: 0.02rem; text-transform: uppercase;">
+                            Launch Intelligent Screening
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            const jdPresets = {
+                python_dev: `We are seeking a Python Backend Engineer with strong experience in Flask or FastAPI, SQL databases (PostgreSQL / MySQL), and REST API design. The ideal candidate has hands-on experience with Docker, Git, unit testing, and deploying services to cloud platforms. Experience with basic machine learning or data processing is a plus.`,
+                data_scientist: `Looking for a Data Scientist with solid skills in Python, Pandas, NumPy, Scikit-Learn, and SQL. Responsibilities include building ML models, performing exploratory data analysis, and communicating insights to stakeholders. Experience with deep learning (PyTorch / TensorFlow) and ML Ops is a strong advantage.`,
+                mern: `Hiring a MERN Stack Developer with strong knowledge of React, Node.js, Express, and MongoDB. The candidate should be comfortable building REST APIs, integrating frontend and backend, and working with Git, Docker, and cloud deployment (Vercel / Render / AWS). Experience with real-time features and dashboards is a plus.`,
+                pm: `We need a Product Manager experienced in working with cross-functional engineering teams to deliver web-based products. The PM should be skilled in writing clear user stories, prioritizing backlogs, defining KPIs, and collaborating with designers and developers. Technical understanding of software development and analytics tools is preferred.`
+            };
+
+            function applyPreset(key) {
+                const jdField = document.getElementById('jd_text');
+                if (jdPresets[key]) {
+                    jdField.value = jdPresets[key];
+                }
+            }
+
+            const fileInput = document.getElementById('cv_files');
+            const fileList = document.getElementById('file-list');
+            const dropZone = document.getElementById('drop-zone');
+            const dropText = document.getElementById('drop-text');
+
+            fileInput.addEventListener('change', (e) => {
+                updateFileList(e.target.files);
+            });
+
+            ['dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, false);
+            });
+
+            dropZone.addEventListener('dragover', () => {
+                dropZone.style.borderColor = 'var(--primary)';
+                dropZone.style.background = 'rgba(99, 102, 241, 0.1)';
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.style.borderColor = 'var(--glass-border)';
+                dropZone.style.background = 'rgba(255, 255, 255, 0.02)';
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    fileInput.files = files;
+                    updateFileList(files);
+                }
+                dropZone.style.borderColor = 'var(--glass-border)';
+                dropZone.style.background = 'rgba(255, 255, 255, 0.02)';
+            });
+
+            function updateFileList(files) {
+                fileList.innerHTML = '';
+                if (files.length > 0) {
+                    dropText.innerText = `${files.length} files selected`;
+                }
+
+                Array.from(files).forEach(file => {
+                    const pill = document.createElement('div');
+                    pill.style.background = 'rgba(99, 102, 241, 0.1)';
+                    pill.style.border = '1px solid rgba(99, 102, 241, 0.2)';
+                    pill.style.padding = '0.5rem 1rem';
+                    pill.style.borderRadius = '0.75rem';
+                    pill.style.fontSize = '0.85rem';
+                    pill.style.color = '#e2e8f0';
+                    pill.style.display = 'flex';
+                    pill.style.alignItems = 'center';
+                    pill.style.gap = '0.5rem';
+
+                    const icon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>`;
+
+                    pill.innerHTML = `${icon} <span>${file.name}</span>`;
+                    fileList.appendChild(pill);
+                });
+            }
+        </script>
+
+        <footer style="text-align: center; margin-top: 6rem; color: #475569; font-size: 0.85rem; padding-bottom: 3rem;">
+            <p>Built with SBERT, spaCy & Flask | Premium Intelligence Engine V2.1</p>
+        </footer>
+    </div>
+</body>
+
+</html>

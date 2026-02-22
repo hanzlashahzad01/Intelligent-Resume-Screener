@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite AI Shortlisting Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="top-nav">
+            <div class="nav-left"></div>
+            <div class="nav-right">
+                <a href="/download" class="btn-nav accent">Download CSV</a>
+                <a href="/" class="btn-nav">Home</a>
+                <a href="/logout" class="btn-nav danger">Logout</a>
+            </div>
+        </nav>
+
+        <header>
+            <span class="stat-label">Analysis Engine V2.1</span>
+            <h1 class="gradient-text" style="font-size: 3.5rem; margin-top: 0.5rem;">Recruitment Hub</h1>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Target Role</span>
+                <div class="stat-value" style="font-size: 1.1rem; color: #94a3b8; max-height: 50px; overflow: hidden;">
+                    {{ jd[:70] }}{% if jd|length > 70 %}...{% endif %}</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Candidate Pool</span>
+                <div class="stat-value">{{ results|length }} Profiles</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Top Recommendation</span>
+                <div class="stat-value" style="color: var(--accent);">{{ results[0].name if results else 'N/A' }}</div>
+            </div>
+            {% if processing_time is not none %}
+            <div class="stat-card">
+                <span class="stat-label">Processing Time</span>
+                <div class="stat-value">{{ processing_time }}s</div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- New Summary Chart Section -->
+        <div class="summary-container" style="margin-bottom: 3rem;">
+            <span class="stat-label">Overall Match Distribution</span>
+            <div class="summary-table-wrapper" style="padding: 2rem; height: 300px;">
+                <canvas id="summaryChart"></canvas>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const summaryCtx = document.getElementById('summaryChart').getContext('2d');
+                new Chart(summaryCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [{% for c in results[: 10] %}"{{ c.name }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+                datasets: [{
+                    label: 'Match Score %',
+                    data: [{% for c in results[: 10] %}{{ c.score }}{% if not loop.last %}, {% endif %} {% endfor %}],
+            backgroundColor: 'rgba(99, 102, 241, 0.5)',
+                borderColor: '#818cf8',
+                    borderWidth: 2,
+                        borderRadius: 8
+                        }]
+                    },
+            options: {
+                responsive: true,
+                    maintainAspectRatio: false,
+                        scales: {
+                    y: {
+                        beginAtZero: true,
+                            max: 100,
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: { size: 10 } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+                });
+            });
+        </script>
+
+        <div class="summary-container">
+            <span class="stat-label">Elite Candidate Overview</span>
+            <div class="summary-table-wrapper">
+                <table class="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Candidate Name</th>
+                            <th>Match %</th>
+                            <th>Skills Found</th>
+                            <th>Experience</th>
+                            <th>Education Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for candidate in results %}
+                        <tr>
+                            <td><span class="badge badge-score">#{{ candidate.rank }}</span></td>
+                            <td style="font-weight: 700;">{{ candidate.name }}</td>
+                            <td>
+                                <span
+                                    class="mini-score {% if candidate.score > 80 %}high{% elif candidate.score > 50 %}mid{% else %}low{% endif %}">
+                                    {{ candidate.score }}%
+                                </span>
+                            </td>
+                            <td>{{ candidate.skills|length }}</td>
+                            <td>{{ candidate.experience }} Years</td>
+                            <td style="color: var(--text-dim); font-size: 0.8rem;">
+                                {% if candidate.education %}
+                                {{ candidate.education[0][:90] }}{% if candidate.education[0]|length > 90 %}...{% endif
+                                %}
+                                {% else %}
+                                N/A
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="candidate-list">
+            {% for candidate in results %}
+            <div class="candidate-profile">
+                <div class="profile-main">
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                        <span class="badge badge-score">#Rank {{ candidate.rank }}</span>
+                        {% if candidate.is_top_5 %}<span class="badge badge-elite">Top Pick</span>{% endif %}
+                    </div>
+                    <h2 style="font-size: 1.8rem; letter-spacing: -0.02em;">{{ candidate.name }}</h2>
+
+                    <div class="profile-meta">
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" style="color: var(--primary-light);">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <strong>Email:</strong> {{ candidate.email }}
+                        </span>
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" style="color: var(--primary-light);">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <strong>Experience:</strong> {{ candidate.experience }} Years
+                        </span>
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" style="color: var(--primary-light);">
+                                <path d="M22 10v6M2 10v6M12 4L12 15"></path>
+                                <path d="M6 10h12a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4a2 2 0 012-2z"></path>
+                            </svg>
+                            <strong>Status:</strong> Sorted
+                        </span>
+                    </div>
+
+                    <div class="ai-insight" style="color: var(--text-main); font-weight: 500;">
+                        <strong>AI Summary & Recommendation:</strong><br>
+                        {{ candidate.summary }}
+                    </div>
+
+                    {% if candidate.top_snippets %}
+                    <div class="ai-insight"
+                        style="margin-top: 1rem; background: rgba(15,23,42,0.7); border-left-color: var(--secondary);">
+                        <strong>Top Matching Evidence from CV:</strong>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: #cbd5e1; font-size: 0.9rem;">
+                            {% for snip in candidate.top_snippets %}
+                            <li style="margin-bottom: 0.35rem;">{{ snip }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 1.5rem; min-width: 0;">
+                        <div style="min-width: 0;">
+                            <span class="stat-label">Skills Found</span>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+                                {% for skill in candidate.skills[:10] %}
+                                <span class="tag">{{ skill }}</span>
+                                {% endfor %}
+                            </div>
+
+                            {% if candidate.missing_skills %}
+                            <span class="stat-label" style="margin-top: 1.5rem;">Missing Skills</span>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+                                {% for skill in candidate.missing_skills %}
+                                <span class="tag tag-missing">{{ skill }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div style="min-width: 0;">
+                            <span class="stat-label">Education & Qualifications</span>
+                            <div style="margin-top: 0.8rem; color: var(--text-main);">
+                                {% for edu in candidate.education %}
+                                <div class="edu-item" style="color: var(--text-main);">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" style="margin-top: 3px; color: var(--primary-light);">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    {{ edu }}
+                                </div>
+                                {% else %}
+                                <div class="edu-item" style="color: #64748b; font-style: italic;">No specific
+                                    qualifications detected</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-visuals">
+                    <span class="stat-label">Expert Match Analysis</span>
+                    <div class="chart-container">
+                        <canvas id="chart-{{ candidate.rank }}"></canvas>
+                    </div>
+                    <div style="width: 100%; height: 1px; background: var(--glass-border); margin: 2rem 0;"></div>
+                    <div style="text-align: center;">
+                        <span class="stat-label">Smart Fit Score</span>
+                        <div class="stat-value"
+                            style="color: var(--primary-light); font-size: 3.5rem; letter-spacing: -0.05em; line-height: 1;">
+                            {{
+                            candidate.score }}<span style="font-size: 1.5rem; margin-left: 2px;">%</span></div>
+                        <div
+                            style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1rem;">
+                            AI Verification Completed
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                (function () {
+                    const ctx = document.getElementById('chart-{{ candidate.rank }}').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Semantic', 'Keyword', 'Skills', 'Experience', 'Education'],
+                            datasets: [{
+                                data: [
+                                    {{ candidate.semantic_score }},
+                            {{ candidate.tfidf_score }},
+                                    {{ [candidate.skills | length * 10, 100] | min }},
+                    {{ [candidate.experience * 10, 100] | min }},
+                { { 95 if candidate.education else 15 } }
+                                ],
+                backgroundColor: 'rgba(129, 140, 248, 0.25)',
+                    borderColor: '#818cf8',
+                        borderWidth: 3,
+                            pointBackgroundColor: '#818cf8',
+                                pointBorderColor: '#fff',
+                                    pointHoverBackgroundColor: '#fff',
+                                        pointHoverBorderColor: '#818cf8',
+                                            pointRadius: 3
+                            }]
+                        },
+                options: {
+                    responsive: true,
+                        maintainAspectRatio: false,
+                            scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.15)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.15)' },
+                            pointLabels: {
+                                color: '#e2e8f0',
+                                    font: { family: 'Outfit', size: 12, weight: 700 }
+                            },
+                            ticks: { display: false },
+                            suggestedMin: 0,
+                                suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                                titleFont: { family: 'Outfit', size: 14 },
+                            bodyFont: { family: 'Inter', size: 13 },
+                            padding: 12,
+                                borderColor: 'rgba(99, 102, 241, 0.3)',
+                                    borderWidth: 1
+                        }
+                    }
+                }
+                    });
+                }) ();
+            </script>
+            {% endfor %}
+        </div>
+
+        <footer style="text-align: center; margin-top: 3rem; color: #475569; font-size: 0.75rem;">
+            Powered by SBERT & spaCy NLP Advanced Engine
+        </footer>
+    </div>
+</body>
+
+</html>

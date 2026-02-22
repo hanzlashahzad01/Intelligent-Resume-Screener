@@ -1,0 +1,7 @@
+John Doe
+Software Engineer
+Skills: Python, Java, SQL, Machine Learning, Git, Docker, Kubernetes
+Experience:
+- Developed microservices in Python and Flask
+- Managed databases using PostgreSQL and MySQL
+- Implemented CI/CD pipelines with Jenkins

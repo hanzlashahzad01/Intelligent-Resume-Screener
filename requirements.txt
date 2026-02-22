@@ -1,0 +1,17 @@
+flask
+scikit-learn
+nltk
+pdfminer.six
+pandas
+numpy
+werkzeug
+python-docx
+spacy
+sentence-transformers
+pyyaml
+thefuzz
+matplotlib
+pytest
+gunicorn
+flask-sqlalchemy
+flask-login
