@@ -1,4 +1,4 @@
-<img width="1912" height="1033" alt="dwww" src="https://github.com/user-attachments/assets/3d6a7edd-7f3f-4f41-9b40-444cf09b050d" /><img width="1912" height="1033" alt="dwww" src="https://github.com/user-attachments/assets/3d6a7edd-7f3f-4f41-9b40-444cf09b050d" />## Intelligent Resume Screener 🚀
+## Intelligent Resume Screener 🚀
 
 An AI-powered tool to automate candidate shortlisting by matching CVs with Job Descriptions using NLP and Cosine Similarity.
 
