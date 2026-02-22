@@ -1,4 +1,4 @@
-## Intelligent Resume Screener 🚀
+<img width="1912" height="1033" alt="dwww" src="https://github.com/user-attachments/assets/3d6a7edd-7f3f-4f41-9b40-444cf09b050d" /><img width="1912" height="1033" alt="dwww" src="https://github.com/user-attachments/assets/3d6a7edd-7f3f-4f41-9b40-444cf09b050d" />## Intelligent Resume Screener 🚀
 
 An AI-powered tool to automate candidate shortlisting by matching CVs with Job Descriptions using NLP and Cosine Similarity.
 
@@ -69,9 +69,9 @@ CV + Job Description se **skill‑match score** nikaalna aur recruiter ko **top 
 
 <img width="1912" height="999" alt="h" src="https://github.com/user-attachments/assets/8c144a8f-bfd0-4213-9484-6f03238d3f4a" />
 
-<img width="1908" height="1027" alt="h1" src="https://github.com/user-attachments/assets/aa755fc0-0b0c-4d4d-a4f6-059c26953d8a" />
+<img width="1912" height="1033" alt="dwww" src="https://github.com/user-attachments/assets/39ffae1f-2ec8-4e64-8609-53a26edc058d" />
 
-<img width="1905" height="1027" alt="h2" src="https://github.com/user-attachments/assets/bfb6167c-4981-44c3-86eb-fef51fc5d352" />
+
 
 ### 🏗️ Tech Stack (Exact)
 - **Language**: Python 3.10+
