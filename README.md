@@ -51,6 +51,28 @@ CV + Job Description se **skill‑match score** nikaalna aur recruiter ko **top 
 
 ---
 
+## ScreenShots
+
+## Register Page
+
+<img width="1915" height="1029" alt="register" src="https://github.com/user-attachments/assets/b8189ca3-3974-486e-a274-2ed009ccab04" />
+
+## Sign-Up-Page
+
+<img width="1913" height="1030" alt="sign up" src="https://github.com/user-attachments/assets/6de38f9f-484e-44be-b1ea-d0ddd93e656b" />
+
+## DashBoard
+
+<img width="1913" height="1030" alt="d" src="https://github.com/user-attachments/assets/5db25f32-1dbc-4b50-a89c-2988f0c79c5e" />
+
+<img width="1912" height="1032" alt="d1" src="https://github.com/user-attachments/assets/c42e4a90-f144-4c52-8f2e-10e27366335a" />
+
+<img width="1912" height="999" alt="h" src="https://github.com/user-attachments/assets/8c144a8f-bfd0-4213-9484-6f03238d3f4a" />
+
+<img width="1908" height="1027" alt="h1" src="https://github.com/user-attachments/assets/aa755fc0-0b0c-4d4d-a4f6-059c26953d8a" />
+
+<img width="1905" height="1027" alt="h2" src="https://github.com/user-attachments/assets/bfb6167c-4981-44c3-86eb-fef51fc5d352" />
+
 ### 🏗️ Tech Stack (Exact)
 - **Language**: Python 3.10+
 - **Backend**: Flask
