@@ -251,6 +251,6 @@ This project is strategically designed to impress reviewers for scholarships lik
 ## 📬 Connect with Me
 I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
 
-## Email: hanzlashahzadhanzlashahzad@gmail.com
+ ### Email: hanzlashahzadhanzlashahzad@gmail.com
 ---
 *Created with ❤️ for international scholarship applications.*
