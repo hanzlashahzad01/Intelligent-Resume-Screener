@@ -247,6 +247,10 @@ This project is strategically designed to impress reviewers for scholarships lik
 - **Software Engineering:** Showcases clean architecture, modular design, and full-stack integration (Flask + ML).
 - **Ethics Conscious:** Addresses privacy and bias, which are critical themes in European tech research and funding.
 - **Problem Solving:** Directly addresses a real-world business need (Efficient Recruitment).
+  
+## Contact Me:
 
+## Email:
+        hanzlashahzadhanzlashahzad@gmail.com
 ---
 *Created with ❤️ for international scholarship applications.*
