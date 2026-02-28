@@ -248,9 +248,14 @@ This project is strategically designed to impress reviewers for scholarships lik
 - **Ethics Conscious:** Addresses privacy and bias, which are critical themes in European tech research and funding.
 - **Problem Solving:** Directly addresses a real-world business need (Efficient Recruitment).
   
-## 📬 Connect with Me
+📬 Connect with Me
 I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
 
- ### Email: hanzlashahzadhanzlashahzad@gmail.com
+Email: hanzlashahzadhanzlashahzad@gmail.com
+
+LinkedIn: https://www.linkedin.com/in/hanzla-shahzad
+
+GitHub: https://github.com/hanzlashahzad01/hanzlashahzad01
+
 ---
-*Created with ❤️ for international scholarship applications.*
+*Created with for international scholarship applications.*
